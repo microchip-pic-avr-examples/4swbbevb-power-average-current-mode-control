@@ -1,4 +1,4 @@
-# dspic33c-power-4swbb-devboard-average-current-mode-control, release v1.0.0
+# 4swbbevb-power-average-current-mode-control, release v1.0.0
 
 ### Release Highlights
 This is the initial release demonstrating the basic control loop implementation of a digital average current mode control loop regulating the output voltage of a 4-switch buck boost converter.
