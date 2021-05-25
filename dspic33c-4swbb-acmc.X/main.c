@@ -72,6 +72,7 @@ int main(void)
     Dev_GuiComm_Init(); //Init before App_GUI_Init())
     App_GUI_Init();
     OS_Scheduler_RunForever();
+    
     return 1;
 }
 /**

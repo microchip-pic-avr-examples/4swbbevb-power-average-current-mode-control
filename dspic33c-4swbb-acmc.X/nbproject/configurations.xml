@@ -132,6 +132,8 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>.</Elem>
+    <Elem>mcc_generated_files</Elem>
+    <Elem>sources</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>

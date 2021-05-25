@@ -25,6 +25,8 @@
             <make-dep-projects/>
             <sourceRootList>
                 <sourceRootElem>.</sourceRootElem>
+                <sourceRootElem>mcc_generated_files</sourceRootElem>
+                <sourceRootElem>sources</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>
