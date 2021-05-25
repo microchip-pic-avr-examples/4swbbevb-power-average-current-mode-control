@@ -42,7 +42,7 @@
 
 #include <xc.h> 
 #include "driver/drv_led.h"
-#include"./mcc_generated_files/pin_manager.h"
+#include "mcc_generated_files/pin_manager.h"
 
 #define LED_STATE_OFF 0
 #define LED_STATE_ON 1
