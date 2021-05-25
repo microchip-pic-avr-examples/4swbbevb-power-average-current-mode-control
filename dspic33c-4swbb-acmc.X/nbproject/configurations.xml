@@ -74,7 +74,7 @@
                    projectFiles="true">
       <logicalFolder name="f1" displayName="app" projectFiles="true">
         <itemPath>sources/app/app_GUI.c</itemPath>
-        <itemPath>sources/app/App_HMI.c</itemPath>
+        <itemPath>sources/app/app_HMI.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="device" projectFiles="true">
         <itemPath>sources/device/dev_button.c</itemPath>
