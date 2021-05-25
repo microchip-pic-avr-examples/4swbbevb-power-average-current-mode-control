@@ -17,9 +17,9 @@
             <name>BoardTest_R0_x</name>
             <creation-uuid>3f0bd505-d935-4f94-8b44-606d854c8ca4</creation-uuid>
             <make-project-type>0</make-project-type>
-            <c-extensions>c</c-extensions>
+            <c-extensions/>
             <cpp-extensions/>
-            <header-extensions>h</header-extensions>
+            <header-extensions/>
             <asminc-extensions/>
             <sourceEncoding>ISO-8859-1</sourceEncoding>
             <make-dep-projects/>
@@ -28,7 +28,7 @@
             </sourceRootList>
             <confList>
                 <confElem>
-                    <name>AVERAGECURRENTMODE</name>
+                    <name>CURRENTMODE</name>
                     <type>2</type>
                 </confElem>
             </confList>

@@ -3,7 +3,7 @@
   <projectmakefile>Makefile</projectmakefile>
   <defaultConf>0</defaultConf>
   <confs>
-    <conf name="AVERAGECURRENTMODE" type="2">
+    <conf name="CURRENTMODE" type="2">
       <platformToolSN>noToolString</platformToolSN>
       <languageToolchainDir>C:\Program Files\Microchip\xc16\v1.50\bin</languageToolchainDir>
       <mdbdebugger version="1">

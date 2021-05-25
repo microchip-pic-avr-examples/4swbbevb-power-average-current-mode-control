@@ -135,7 +135,7 @@
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
-    <conf name="AVERAGECURRENTMODE" type="2">
+    <conf name="CURRENTMODE" type="2">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
         <targetDevice>dsPIC33CK256MP506</targetDevice>
@@ -294,7 +294,7 @@
         <property key="generic-16-bit" value="false"/>
         <property key="legacy-libc" value="true"/>
         <property key="mpreserve-all" value="false"/>
-        <property key="oXC16glb-macros" value="AVERAGECURRENTMODE"/>
+        <property key="oXC16glb-macros" value="CURRENTMODE"/>
         <property key="omit-pack-options" value="1"/>
         <property key="output-file-format" value="elf"/>
         <property key="preserve-all" value="false"/>
