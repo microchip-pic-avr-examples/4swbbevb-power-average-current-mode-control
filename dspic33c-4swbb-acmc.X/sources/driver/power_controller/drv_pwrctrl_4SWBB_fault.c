@@ -49,8 +49,8 @@
 #include "misc/fault_common.h"
 #include "driver/power_controller/drv_pwrctrl_4SWBB.h"
 #include "driver/drv_adc.h"
-#include "../mcc_generated_files/cmp3.h"
-#include "../mcc_generated_files/cmp1.h"
+#include "mcc_generated_files/cmp3.h"
+#include "mcc_generated_files/cmp1.h"
 #include "drv_pwrctrl_4SWBB_fault.h"
 #include "drv_pwrctrl_4SWBB_settings.h"
 

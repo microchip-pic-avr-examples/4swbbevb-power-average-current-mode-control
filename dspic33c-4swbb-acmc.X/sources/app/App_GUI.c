@@ -46,13 +46,13 @@
 #include "device/dev_button.h"
 #include "driver/power_controller/drv_pwrctrl_4SWBB.h"
 #include "driver/power_controller/drv_pwrctrl_4SWBB_fault.h"
-#include "../mcc_generated_files/pin_manager.h"
+#include "mcc_generated_files/pin_manager.h"
 #include "driver/drv_led.h"
-#include"driver/drv_adc.h"
-#include "../sources/driver/power_controller/drv_pwrctrl_4SWBB_settings.h"
-#include "../device/dev_gui_comm.h"
+#include "driver/drv_adc.h"
+#include "driver/power_controller/drv_pwrctrl_4SWBB_settings.h"
+#include "device/dev_gui_comm.h"
 #include "app_HMI.h"
-#include "../driver/power_controller/Controller_pwrctrl_4SWBB.h"
+#include "driver/power_controller/Controller_pwrctrl_4SWBB.h"
 
 #define APP_GUI_PROTOCOL_ID 0x40EF
 

@@ -38,11 +38,12 @@
 #ifndef DEV_GUICOMM_H
 #define DEV_GUICOMM_H
 
-#include "stdint.h"
-#include "stdbool.h"
+#include <stdint.h>
+#include <stdbool.h>
 
 //abstraction of uart interface:
-#include "../../mcc_generated_files/uart1.h"
+#include "mcc_generated_files/uart1.h"
+
 #define GuiComm_ReadyToSend UART1_IsTxReady
 #define GuiComm_Write       UART1_Write
 #define GuiComm_IsRxReady   UART1_IsRxReady

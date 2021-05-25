@@ -40,10 +40,10 @@
     TERMS.
 */
 
-#include "fault_common.h"
-
 #include <stdbool.h>
 #include <stddef.h>
+
+#include "misc/fault_common.h"
 
 /*******************************************************************************
  * Function:       FAULT_Init

@@ -35,8 +35,8 @@
  *     example: to record real-time data for a step response of output voltage and current
  */
 
-#include "stdint.h"
-#include "stdbool.h"
+#include <stdint.h>
+#include <stdbool.h>
 #include <stddef.h>
 #include "dev_gui_comm.h"
 

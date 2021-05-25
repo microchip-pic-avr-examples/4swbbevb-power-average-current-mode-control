@@ -39,7 +39,7 @@
 #define	_OS_TIMER_H_
 
 #include <stdbool.h>
-#include "main/project_settings.h"
+#include "project_settings.h"
 
 #ifndef OS_TIMER_NUMBER_OF_TIMERS
     #error OS_TIMER_NUMBER_OF_TIMERS needs to be defined in the file project_settings.h

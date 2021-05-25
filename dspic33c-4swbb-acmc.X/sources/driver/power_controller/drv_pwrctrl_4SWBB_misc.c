@@ -44,12 +44,12 @@
 #include <p33CK256MP506.h>
 #include <stdint.h>
 
-#include "drv_pwrctrl_4SWBB.h"
-#include "drv_pwrctrl_4SWBB_internal.h"
-#include "../drv_adc.h"
-#include "../mcc_generated_files/pwm.h"
-#include "../mcc_generated_files/pin_manager.h"
-#include "drv_pwrctrl_4SWBB_settings.h"
+#include "driver/power_controller/drv_pwrctrl_4SWBB.h"
+#include "driver/power_controller/drv_pwrctrl_4SWBB_internal.h"
+#include "driver/drv_adc.h"
+#include "mcc_generated_files/pwm.h"
+#include "mcc_generated_files/pin_manager.h"
+#include "driver/power_controller/drv_pwrctrl_4SWBB_settings.h"
 
 PWR_CTRL_REFDATA_t pwr_ctrl_ref_data;
 

@@ -43,9 +43,9 @@
 #include <xc.h>
 #include <stdint.h>
 
-#include "../mcc_generated_files/system.h"
-#include "../mcc_generated_files/pin_manager.h"
-#include "../mcc_generated_files/pwm.h"
+#include "mcc_generated_files/system.h"
+#include "mcc_generated_files/pin_manager.h"
+#include "mcc_generated_files/pwm.h"
 #include "mcc_generated_files/cmp2.h"
 
 #include "drv_pwrctrl_4SWBB.h"

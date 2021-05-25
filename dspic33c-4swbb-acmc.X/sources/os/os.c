@@ -26,8 +26,8 @@
 //=======================================================================================================
 
 
-#include "../../mcc_generated_files/system.h"
-#include "../../mcc_generated_files/watchdog.h"
+#include "mcc_generated_files/system.h"
+#include "mcc_generated_files/watchdog.h"
 #include "project_settings.h"
 
 #include "os_scheduler.h"

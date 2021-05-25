@@ -40,6 +40,7 @@
 #include <stdint.h>
 #include <xc.h>
 #include "project_settings.h"
+
 #if OS_FEATURE_WATCHDOG_ENABLED == 1
 #include "os_watchdog.h"
 #endif

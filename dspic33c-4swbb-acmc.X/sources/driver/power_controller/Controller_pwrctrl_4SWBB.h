@@ -46,8 +46,8 @@
 
 #include <xc.h> 
 #include "smps_control.h"   //interfaces toSwitch Mode Power Supply compensator library.
-#include "../dcdt/avgcm/dcdt_generated_code/avgcm_dcdt.h"   //coefficients for average current controller
-#include "../dcdt/vmc/dcdt_generated_code/vmc_dcdt.h"       //coefficients for voltage controller
+#include "dcdt/avgcm/dcdt_generated_code/avgcm_dcdt.h"   //coefficients for average current controller
+#include "dcdt/vmc/dcdt_generated_code/vmc_dcdt.h"       //coefficients for voltage controller
 
 //======================================================================================================================
 // @brief extern declarations

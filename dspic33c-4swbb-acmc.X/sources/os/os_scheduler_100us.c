@@ -43,6 +43,7 @@
 #include <xc.h>
 #include "project_settings.h"
 #include "os/os_sys_time.h"
+
 #if OS_FEATURE_WATCHDOG_ENABLED == 1
 #include "os_watchdog.h"
 #endif
