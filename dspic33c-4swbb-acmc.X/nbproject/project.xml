@@ -30,7 +30,7 @@
             </sourceRootList>
             <confList>
                 <confElem>
-                    <name>CURRENTMODE</name>
+                    <name>default</name>
                     <type>2</type>
                 </confElem>
             </confList>
