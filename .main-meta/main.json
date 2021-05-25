@@ -42,8 +42,7 @@
         "TIMER"
       ],
       "subcategories": [
-		"Power",
-		"Power Management and Conversion"
+		"Power"
        ],
        "keywords": [
 		"dsPIC",
