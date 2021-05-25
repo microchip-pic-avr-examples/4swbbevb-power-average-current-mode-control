@@ -145,11 +145,11 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>noID</platformTool>
         <languageToolchain>XC16</languageToolchain>
-        <languageToolchainVersion>1.50</languageToolchainVersion>
+        <languageToolchainVersion>1.70</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="dsPIC33CK-MP_DFP" vendor="Microchip" version="1.4.102"/>
+        <pack name="dsPIC33CK-MP_DFP" vendor="Microchip" version="1.6.176"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
