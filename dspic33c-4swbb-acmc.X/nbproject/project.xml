@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1">
+    <type>com.microchip.mplab.nbide.embedded.makeproject</type>
+    <configuration>
+        <data xmlns="http://www.netbeans.org/ns/make-project/1">
+            <name>dspic33c-4SWBB-ACMC</name>
+            <name>dspic33c-4SWBB-ACMC-local</name>
+            <name>dspic33c-4SWBB-ACMC</name>
+            <name>dspic33c-4SWBB-VMC</name>
+            <name>PoBo4SWBB_Rfinal_1_1</name>
+            <name>PoBo4SWBB_Rfinal_1_0</name>
+            <name>PoBo4SWBB_R0_CLtest_x</name>
+            <name>PoBo4SWBB_R1test_x</name>
+            <name>PoBo4SWBB_R0_x</name>
+            <name>PoBoTestsetup_R0_x</name>
+            <name>BoardTest_R1_x</name>
+            <name>BoardTest_R0_x</name>
+            <creation-uuid>3f0bd505-d935-4f94-8b44-606d854c8ca4</creation-uuid>
+            <make-project-type>0</make-project-type>
+            <c-extensions>c</c-extensions>
+            <cpp-extensions/>
+            <header-extensions>h</header-extensions>
+            <asminc-extensions/>
+            <sourceEncoding>ISO-8859-1</sourceEncoding>
+            <make-dep-projects/>
+            <sourceRootList>
+                <sourceRootElem>.</sourceRootElem>
+                <sourceRootElem>mcc_generated_files</sourceRootElem>
+                <sourceRootElem>sources</sourceRootElem>
+            </sourceRootList>
+            <confList>
+                <confElem>
+                    <name>default</name>
+                    <type>2</type>
+                </confElem>
+            </confList>
+            <formatting>
+                <project-formatting-style>false</project-formatting-style>
+            </formatting>
+        </data>
+    </configuration>
+</project>

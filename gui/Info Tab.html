@@ -1,0 +1,163 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+    <meta http-equiv=Content-Type content="text/html; charset=windows-1256">
+    <style>
+        <!--
+        body {
+            font-family: Courier New, Courier, monospace;
+            font-size: 9pt;
+        }
+        p {
+            margin: 0;
+            line-height: 110%;
+        }
+            p.title {
+                font-size: 12pt;
+                font-weight: bold;
+                margin-top: 16pt;
+                margin-bottom: 6pt;
+            }
+            p.subtitle {
+                font-weight: bold;
+                margin-top: 10pt;
+                margin-bottom: 4pt;
+            }
+            p.with_left_margin {
+                margin-left: 20pt;
+            }
+        table.MsoNormalTable {
+            font-size: 9pt;
+            border-collapse: collapse;
+            text-align: center;
+        }
+            table.MsoNormalTable td {
+                border: solid windowtext 1pt;
+                padding: 3pt 8pt 3pt 8pt;
+            }
+            table.MsoNormalTable tr:first-child td {
+                font-weight: bold;
+            }
+        -->
+    </style>
+</head>
+
+<body lang=EN-US>
+    <div>
+        <p>-----------------------------------------------------------------------------------------------------------------------------------</p>
+        <p>NO WARRANTIES APPLY TO THIS SOFTWARE.</p>
+        <p>THE COMPANY SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.</p>
+        <p>-----------------------------------------------------------------------------------------------------------------------------------</p>
+
+        <p class="title">GENERAL DESCRIPTION</p>
+        <p class="subtitle">Status message format</p>
+        <table class=MsoNormalTable>
+            <tr>
+                <td>BOF</td>
+                <td colspan=2>Protocol ID</td>
+                <td colspan=2>Length</td>
+                <td colspan=7>Data</td>
+                <td colspan=2>CRC</td>
+                <td>EOF</td>
+            </tr>
+            <tr>
+                <td>55</td>
+                <td>00</td>
+                <td>01</td>
+                <td>xx</td>
+                <td>xx</td>
+                <td>Word_1H</td>
+                <td>Word_1L</td>
+                <td>Word_2H</td>
+                <td>Word_2L</td>
+                <td>...</td>
+                <td>Word_NH</td>
+                <td>Word_NL</td>
+                <td>xx</td>
+                <td>xx</td>
+                <td>0D</td>
+            </tr>
+        </table>
+        <p class="subtitle">Scope message format</p>
+        <table class=MsoNormalTable>
+            <tr>
+                <td>BOF</td>
+                <td colspan=2>Protocol ID</td>
+                <td colspan=2>Length</td>
+                <td>Time base index</td>
+                <td colspan=2>Time base value</td>
+                <td>Number of channels (NoC)</td>
+                <td colspan=4>Channel information</td>
+                <td colspan=2>Number of Samples per channel - NoS</td>
+                <td colspan=11>Data</td>
+                <td colspan=2>CRC</td>
+                <td>EOF</td>
+            </tr>
+            <tr>
+                <td>55</td>
+                <td>53</td>
+                <td>44</td>
+                <td>xx</td>
+                <td>xx</td>
+                <td>1-ps, 2-ns, ..., 7-h</td>
+                <td>xx</td>
+                <td>xx</td>
+                <td>xx</td>
+                <td>Ch_1</td>
+                <td>Ch_2</td>
+                <td>...</td>
+                <td>Ch_NoC</td>
+                <td>xx</td>
+                <td>xx</td>
+                <td>Smpl.<br>1<br>Ch_1<br>HI</td>
+                <td>Smpl.<br>1<br>Ch_1<br>LO</td>
+                <td>...</td>
+                <td>Smpl.<br>1<br>Ch_NoC<br>HI</td>
+                <td>Smpl.<br>1<br>Ch_Noc<br>LO</td>
+                <td>...</td>
+                <td>Smpl.<br>NoS<br>Ch_1<br>HI</td>
+                <td>Smpl.<br>NoS<br>Ch_1<br>LO</td>
+                <td>...</td>
+                <td>Smpl.<br>NoS<br>Ch_NoC<br>HI</td>
+                <td>Smpl.<br>NoS<br>Ch_Noc<br>LO</td>
+                <td>xx</td>
+                <td>xx</td>
+                <td>0D</td>
+            </tr>
+        </table>
+
+        <p class="title">Four-Switch Buck-Boost Development Board - Protocol</p>
+        <p class="subtitle">Length:</p>
+        <p>
+			Only the lowest 15 bits of the length-word can be used for describing the length of the data.
+			The highest bit of the length-word is being used for determining CRC-usage.
+		</p>
+        <p class="subtitle">CRC:</p>
+        <p>
+			The highest bit of the length-word in all data transmissions determines if CRC is being used or not.
+			</br>0: CRC has to be 0x0000. for receiving, the data package needs to be checked for CRC = 0x0000.
+			</br>1: CRC-16 with start polynom 0xA001 is being used. 
+		</p>
+        <p class="subtitle">Status message data words:</p>
+        <p>
+			0: Vdd
+			</br>1: Vout 
+			</br>2: Iout
+			</br>3: Iin 
+			</br>4: AN15 
+			</br>5: Vaux 
+			</br>6: Power controller state 
+			</br>7: Collective faults
+			</br>8: Gui flags
+			</br>9: Power controller flags 
+			</br>10: Duty cycle buck pwm
+			</br>11: Duty cycle boost pwm
+			</br>12: Current control result 
+		</p>
+    </div>
+</body>
+</html>
