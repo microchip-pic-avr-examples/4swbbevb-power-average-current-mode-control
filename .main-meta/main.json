@@ -1,0 +1,56 @@
+{
+   "metaDataVersion":"1.0.0",
+   "category":"com.microchip.ide.project",
+   "content":{
+      "metaDataVersion":"1.0.0",
+      "name":"com.microchip.mplabx.project.4swbbevb-power-average-current-mode-control",
+      "version":"1.0.0",
+      "displayName":"4-Switch Buck-Boost Converter Average Current Mode Control",
+      "projectName":"4swbbevb-power-average-current-mode-control",
+      "shortDescription":"Digital control loop implementation of a simple average current mode controller regulating the output voltage of a 4-switch buck-boost converter",
+      "ide":{
+         "name":"MPLABX",
+         "semverRange":">=5.40.0"
+      },
+      "compiler":{
+         "name":"XC16",
+         "semverRange":"^1.50.0"
+      },
+      "dfp":{
+         "name":"dsPIC33CK-MP_DFP",
+         "semverRange":">=1.4.102"
+      },
+	  "configurator": {
+         "name": "MCC",
+         "semverRange": ">=4.0.1"
+      },
+      "device":{
+         "metaDataVersion":"1.0.0",
+         "category":"com.microchip.portal.contentRef",
+         "content":{
+            "metaDataVersion":"1.0.0",
+            "category":"com.microchip.device",
+            "name":"dsPIC33CK256MP506",
+            "versionRange":"*"
+         }
+      },
+      "peripherals":[
+        "UART",
+        "Analog Comparator",
+        "SMPS PWM",
+        "ADC",
+        "TIMER"
+      ],
+      "subcategories": [
+		"Power"
+       ],
+       "keywords": [
+		"dsPIC",
+        "DSC",
+        "Digital Power Conversion",
+        "Power Conversion",
+        "Power Supply",
+		"SMPS"
+       ]
+     }
+}

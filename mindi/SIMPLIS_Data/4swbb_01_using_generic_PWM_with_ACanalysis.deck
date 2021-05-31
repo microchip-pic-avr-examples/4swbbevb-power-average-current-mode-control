@@ -1,0 +1,405 @@
+* C:\BitBucket\4SWBB_VMODE\mindi\4swbb_01_using_generic_PWM_with_ACanalysis.wxsch
+.node_map BOOST_PWMH 50
+.node_map BOOST_PWML 52
+.node_map BUCK_PWMH 49
+.node_map Iin_CT 45
+.node_map BUCK_PWML 51
+.node_map VOUT_ 47
+.node_map VOUT 48
+.node_map VCTRL 46
+.ac DEC 100 100 20k
+.print  ALL
+.options PSP_START=470u PSP_NPT=10001 POP_ITRMAX=20 POP_OUTPUT_CYCLES=5 SNAPSHOT_INTVL=0
++ NEW_ANALYSIS MIN_AVG_TOPOLOGY_DUR=1a AVG_TOPOLOGY_DUR_MEASUREMENT_WINDOW=128
+.pop  TRIG_GATE=X1.!D_CYCLE  TRIG_COND=0_TO_1  MAX_PERIOD=2u  CONVERGENCE=10f  CYCLES_BEFORE_LAUNCH=50
++  TD_RUN_AFTER_POP_FAILS=-1
+C1 40 0 300u IC=0
+C2 28 0 100p
+C3 0 29 560p
+X$D1 0 38 DIODE_SPICE_V2$1
+X$D2 0 39 DIODE_SPICE_V2$2
+X$D3 39 36 DIODE_SPICE_V2$3
+X$D4 38 35 DIODE_SPICE_V2$4
+X$D5 31 30 DIODE_SPICE_V3$5
+V$IPROBE1 34 35 0.0
+.PRINT I(V$IPROBE1)
+.GRAPH IPROBE1#P axisType="grid" axisName="Iin" persistence=-1 curveLabel="Iin" analysis="tran|pop"
++ xLog="auto" yLog="lin"  nowarn=true disabled=false 
+V$IPROBE2 38 42 0.0
+.PRINT I(V$IPROBE2)
+.GRAPH IPROBE2#P axisType="grid" axisName="IL" persistence=-1 curveLabel="IL" analysis="tran|pop"
++ xLog="auto" yLog="lin"  nowarn=true disabled=false 
+L1 42 43 10u
+.PRINT V(#BOOST_PWML)
+.GRAPH :#BOOST_PWML axisType="grid" axisName="BOOST_PWM_L" persistence=-1 curveLabel="BOOST_PWM_L"
++ analysis="tran|pop" xLog="auto" yLog="auto"  nowarn=true disabled=false PROBEREF=Probe1
++  
+.PRINT V(#BUCK_PWMH)
+.GRAPH :#BUCK_PWMH axisType="grid" axisName="BUCK_PWM_H" persistence=-1 curveLabel="BUCK_PWM_H"
++ analysis="tran|pop" xLog="auto" yLog="auto"  nowarn=true disabled=false PROBEREF=Probe2
++  
+.PRINT V(#VOUT)
+.GRAPH :#VOUT curveLabel= VOUT nowarn=true ylog=auto xlog=auto analysis=tran|pop disabled=false
++ PROBEREF=Probe3  
+.PRINT V(#Iin_CT)
+.GRAPH :#Iin_CT axisType="grid" axisName="i" persistence=-1 curveLabel="Iin_CT" analysis="tran|pop"
++ xLog="auto" yLog="auto" separateCurves=true  nowarn=true disabled=false PROBEREF=Probe4
++  
+.PRINT V(#BOOST_PWMH)
+.GRAPH :#BOOST_PWMH axisType="grid" axisName="BOOST_PWM_H" persistence=-1 curveLabel="BOOST_PWM_H"
++ analysis="tran|pop" xLog="auto" yLog="auto"  nowarn=true disabled=false PROBEREF=Probe5
++  
+.PRINT V(#VCTRL)
+.GRAPH :#VCTRL axisType="grid" axisName="VREF" persistence=-1 curveLabel="Vref" analysis="tran|pop"
++ xLog="auto" yLog="auto"  nowarn=true disabled=false PROBEREF=Probe6  
+.PRINT V(#BUCK_PWML)
+.GRAPH :#BUCK_PWML axisType="grid" axisName="BUCK_PWM_L" persistence=-1 curveLabel="BUCK_PWM_L"
++ analysis="tran|pop" xLog="auto" yLog="auto"  nowarn=true disabled=false PROBEREF=Probe7
++  
+.PRINT V(#VOUT_)
+.PRINT V(#VCTRL)
+.GRAPH "db(:#VOUT_/:#VCTRL)" Curvelabel="Gain" nowarn=true yunit="dB" complete=True
++ analysis="ac" ylog=lin xlog=auto  ydelta=20 persistence=-1 colourname=Probe8_bode_color
++   axistype=grid axisname=bodemag order=0    userid=Probe8$GAIN. MeasureSpec="Gain\sCrossover\sFrequency\s(dB\sPlot)|0|0|0|0!Gain\sMargin\s(dB\sPlot)|0|0|0|0"
+.post_process probe_measure Probe8$GAIN. Gain\sCrossover\sFrequency\s(dB\sPlot)|0|0|0|0!Gain\sMargin\s(dB\sPlot)|0|0|0|0
+.GRAPH "ph(:#VOUT_/:#VCTRL)" Curvelabel="Phase" nowarn=true yunit="degrees" complete=True
++ analysis="ac" ylog=lin xlog=auto  ydelta=45 persistence=-1 colourname=Probe8_bode_color
++    axisname=bodephase order=1    userid=Probe8$PHASE. MeasureSpec="Phase\sMargin\s(Phase\sPlot)|0|0|0|0"
+.post_process probe_measure Probe8$PHASE. Phase\sMargin\s(Phase\sPlot)|0|0|0|0
+R1 0 30 47
+R10 48 0 20
+R11 37 36 60m
+R12 48 47 1k
+R13 47 0 1k
+R2 30 45 470
+R3 45 27 3.3k
+R4 45 29 150
+R5 45 28 150
+R6 39 43 20m
+R7 37 40 20m
+R8 48 37 20m
+R9 33 32 20m
+X$S1 35 38 49 0 SIMPLIS_VC_SWITCH$6
+X$S2 38 0 51 0 SIMPLIS_VC_SWITCH$7
+X$S3 36 39 50 0 SIMPLIS_VC_SWITCH$8
+X$S4 39 0 52 0 SIMPLIS_VC_SWITCH$9
+!T$TX1 N_WIND=2 34 33 N1=1 0 31 N2=100
+L$TX1 34 33 10u
+X$U1 49 51 46 Complemetary_PWM$10
+X$U2 52 50 46 Complemetary_PWM$11
+V2 44 0 AC 1m 0
+V3 32 0 8
+V4 46 44 850m
+V6 27 0 3.3
+X1 38 41 PERIODIC_OP$12
+.subckt PERIODIC_OP$12  1 3
+.NODE_MAP IN 1
+.NODE_MAP OUT 3
+!D_CYCLE 3 0 1 302 M1M IC=0
+VREF 302 0 DC 2.5
+.MODEL M1M COMP RIN=10MEG ROUT=50 VOL=0 VOH=5  HYSTWD=0.002 DELAY=0
+.ends PERIODIC_OP$12
+
+?@@--START ENCRYPTION: "Complemetary_PWM"
+?@@Dq+r74Dd+59SieUimg4Yh7McZhmvikxdOp66OVxNVjBceJKBOBtVL2Ny+AZxLJzsZb99?##
+?@@12+oUIkc9fzcc04wRXb2dgN6Vutdk1Ao/0pxESaIKW6Cran3NXGCW2C9uQ9A6RimgxWH?##
+?@@TMRFV3aA5SS3eBZqoQ7Y6xSUH6gzQvQ6ed2to0EkWrs5OOSG1lakzqstuny7MmLn0fdL?##
+?@@beDavRrMNuZd+GgE4wRa8IzNqp1V086Q4FWDqR/uuLGHa64WUAXqbgl5myJRzLCTF+FI?##
+?@@jvxQIfV3OPUeUJcYWWbiwW5WlTSz7kHDo8LJpqhr/6TceQyFgI0bLytd3j1o7irJeDp/?##
+?@@7z6MnZHkwvUUWQvn/7LIm2z3RA8e24GCncP7ao2s0rBb6pEX2Poh4L3ys+V/wFB9cdYX?##
+?@@KI+06xkZe6TTOKJMn0IUw7vA8OHcNMJld9d+dMkyRDEmvVkP8NQ5JfSikTxpJbHOPCJJ?##
+?@@wbIdvK4a9N7qTCkWlD0OISl+H90pbBlngZ+xAieRs4+NvNMtuC+Am0a5RfLB4mcudtrR?##
+?@@kh6cgybvqlFWgLuWJglRq6sPGYR4/w5dL9J9ZNG3zvVQ1oJDklY3JZBCNWI0FvhzIYkG?##
+?@@Z6xnqyYN8D+LFvLzeIJYdFJZxH+5X9n6FcS3aPzvluCiW0vxJ5tC+eQAD1kqj2KluME/?##
+?@@/K2EGsYID2Y37xgTwm/laecxf8RKAUgIVW8wRatJgCIv3e1Et5bEueMDwh5KrkhhwLCo?##
+?@@XVaoN5KnaYWnhuRt4d1YFAY4/g5OylkIOvLdk0EqcvoLHZHGFy1BtkfSmg9lHblfxsLu?##
+?@@7jV5RCGMcBbKRP5oHzx/V9ssM12KFfr/16lbF4sGlx0uDWTgVmXTubGReGSIXPy90O+v?##
+?@@A1DyJj70va5zt5qgnedawTN9T6CWK4Uhfvmj06wWGH7ojD0sgJdhdIxVz4x/KXqLZfef?##
+?@@eD6siavSusctiqQ6oEapNfk9AsFrpItwUE6uN8tuBxsY4hLY3O82au1YTVpDTcKdWNcO?##
+?@@5ejNKS7kt0Cr6vUECiJ2YoWhDm3NfyGTi25/hk3libV6JUx70BVeiw4Mnwt3KdFmFa51?##
+?@@mmM1RcLvDg14Fjjc5/iQcpoy2KZxqIk4Riu0bbUftVlxnDEXKOpn8CqznWkS+mHtBsL5?##
+?@@p9MtwtZzyraaxKhojCmGiEkt099QRuJSl0CwkfxUxuUUR2sPkG/1WNH/VrkViZGC6IO6?##
+?@@dBxfJ3vFrPdFbsf6PFEHQ/bJUHexl2pqHwxYspxBHY4D1krVvkrWmA/XDxxQVvVNGwoK?##
+?@@Tc13seuSF/x9JkN4tvWMAaYptwwKrBb46WSJXIpyFYH4El8qBsdV1cuR5jgcCCOGKW5q?##
+?@@rg+zLTOHxoVaCfcuu487llbg9p1WCoeZkGGgzUstaq1YURjX1spwlfS8i9z+A9x8HR3c?##
+?@@w8NEbe6iZImYubuNAIQ7EofFOb9Axntn0jzUCB8215SufE61tKIS6krptba51e7v8tOW?##
+?@@fGH46snoFFAFuRfSzVSCbao5uRZP5HN+z8MJntnAo2lH7UwAjLZE8nCeUwCEButYQf22?##
+?@@GQ6WvkZijCYhBrvW2rWf0tAFATsDr90ssHYqrgTEaiLbJNQ2FrY1u38NQl23DL90DFN0?##
+?@@MuVzX/ZKmoCRAgsue6yWmuMwlH+0av02AR16Q1iJAdSVnqzddLrTlwQdkAGxvJIsNY/e?##
+?@@T96dYulpg8KAU7Hh3aVrwJkgDAu/RS5TImNcclc5x5I92pHQoFN0/DGs+s4ZYFKExz64?##
+?@@SKIX97Aa3QUg8BSbkT8D89V9N6aTsrUZTUlYfJip21wyZKZjbMghhZRntAlHoJrOFzgV?##
+?@@6QoZizoUzc5++yDQ4pF9xJXrUOZKBMne2eNqSvAreqX+J9Ng/os25d2ETPZBhoQQ2oFg?##
+?@@UvjWaz+ZAd9oiQOsB1Bfl6TOV5Fq9Z+4MpBSXg36nYE6+8DGwQu9ndwkAYLdeo2wBsGo?##
+?@@x+aQzvGxwL0n8SQ2DuAHcPY8ZzECU8k1A4Jkn+1Kv/HVJvjB0M89WEHKosEqBso56ozL?##
+?@@EMDqooBMFqS15GaBUz8+gD753P9kOq4WiCPxVxBEZeQ5+qlvTenpMtOAnyKg0Dg6o5Gp?##
+?@@5ejNKTp1hW1iNaM+Z9RbUkIFItVDl/16phfFYcM7dvRrdGBlB/AUUTOJ1urzZJrKDKJ5?##
+?@@WjxvLhO4gIEpBl+fYOTsCfcESX0fmlB8F8dm5nsA/UAql8N5V5GvA0K/Y+FEYbmbPBwT?##
+?@@M+2Gtze2X+vR8q4G3l9/LO9d2GXo1kJ2kfqLexpwWI9VsabewUtXL3618fDMjOWau+sc?##
+?@@MNNNrgFyvDPAEjnfI1EWb/s82P63mDAzSzVCEveNWtZceLP+F73oNgjR7MF27Jo9Sq/1?##
+?@@KZfHRO0pDrSY9QSEOZoZgoEkLSSd31p+b102ezAptD908eb2A7RSfM65U3mrxfQMlWh7?##
+?@@TtWKCXvg/Iz9YJ1ZsEfXR7DJ/A2830WVQg9ztYyF8MTA/sIC/Y5LrchPCsDWWo3jyD1x?##
+?@@W0WChg7UsJM3eY5kr5VfwqEKnGLPdH2YZqlhZ2yobG8Hk9iPpee/QG88nBvscO1OTyLn?##
+?@@+Is3uFAQXWGrvFloaiRMQcho7AhdD2eM/YrKpQhmA3cK3Hv/fZP8VxQ9UIlH7nzhyJlw?##
+?@@7Sxl7BVpjuBUbH+zLq7BvVeMZDQoNRDAD2Clwy7Kw8LzmdY6nWg3/f5ZHcpNJ8SLrBb3?##
+?@@KqDbnKTDQPffgibrUQL/MGGuemgQkKMv02xOX2Dd90qMSVcqZiQKhz9Lli9YpqG52WV0?##
+?@@7z6MnfSXKNA4BwlroKUaoCTnWqgW+o8Q9WDC9QtYTrEmRJbINNE4Y56kHRIaxsBYBenG?##
+?@@1FaIS09d3pENVdgzaJsrgfqwwMIFPJOxD67FnwFcFhBKbROb4TITP94PWmLQDkvL93kL?##
+?@@xdVqHU5iyweSkEBiQ6xdgF4TLL4hVMy4/GBQhpN4stpTZ0kNNCVUOtF1ZfXLHsAL8i+k?##
+?@@NgfAwZCQ4n2AugO+Os6F2N8CrEuXmfuZu+qTkOuFf1dmwOyTXWayFcOY15dgaorNIKbH?##
+?@@jwRjeacUcLGXFQVDa+Zh9yDVoUach4MYXlbYY50eFIdx+uinl3JshcJVYoSJE9g/ead5?##
+?@@VAn8HP6SNUbGO9dEVlmTxOreh/nLnKGMZdQcc+L804P3fKn0NLgGqyxTh/O1ZAVJZYBV?##
+?@@LboUpVE4C3KFHnaggoyd4Jk2/YNyF2fbvNaz8YHdPBTlvbvYn/fcNceLUzleVhxLNA7w?##
+?@@fnIem3pFh6MZQnvpEbXoQ8btkNVib8ug4/j4XK7gz3fHRsnM0x8TV2fVQ8GGdRnB5xzv?##
+?@@m2tInvyDzvc00NAwPkgVhMUIPko/Cdz0ogsidjAgEZ3n/MEWWs7UdP4Wia5nSeyYVpSQ?##
+?@@xMxXxVa6pRNNbArbOXTpUK9eQA3ks9eF2J0QL09INr/s3R5jIKd2rbONJPJ3CaH3BMbN?##
+?@@yfe2fxTGEPxlV0pHsNyRwIEXhveNT5v53rj+jGtmUGrLOrT5GiV48xMK2h5sVImZXS6Q?##
+?@@wrswFHOQQx9XNN62WTtDc+Pe0xnH84bDDfH7/zNhT+nzNuvDagCo3XRDNw5Ew8DIZrhh?##
+?@@94IkYOlWt9IaCzw6UBwWzVRdrb8ZI5PBPV4/jSKBIc5Dli2x3urJQ2n1FaV24mYkh/mH?##
+?@@/K2EGg1Y9Zuto8cxAyXdXhsHH70+36qtArYARM/n0h6YlMunzu4JeFr3KrSWZgEkaent?##
+?@@jfM9ydYMbx2/NxmgWY0A559PPO9es0Br47YtHMTKDDd5CcIYn8wbZlQKujN4mMrQ8iOA?##
+?@@UvjWawM22i24yu75Q+AZhXxzIv4CkNB3yL/Gf1Ro3feZpKyJslhpTLPYhka+PXq+bXr5?##
+?@@E9ojrN8kH8YEq8hr+uPw27uemdBrKpOuBVhUKBZcuIYdYin8fmYVW+nUkpmi50aBmxl0?##
+?@@JGxoiosiooXrHKh0AJvZz48utRZzVbAvCpIonuGuyLczMTtAA3bzTEly2954Wd8D7ZTX?##
+?@@/baXcr444zp3tCJByifxGUbrhfqoVRf58uwjkn9qKklQruLaNYt4wQZEpD/EiGRxcUpa?##
+?@@/r+qyrl6e8UjHaDgOjJb5qHP/8I8I5cFHBNZ/K+TySjBIBuoCmyrGM73LN/HwoU7k7ZM?##
+?@@S7tRAEju3G0XgPRMqdZKjoeLdvF3OVx7mHHqR7Onps1LreyZJHTCbhudUpPTsLT+Wla+?##
+?@@vIe+AvwmmU6C1Fs5i4gEgY55pBEX6cOpTXP0WZGGkBZxdOTvf/PCoSMN02dipvHrNip2?##
+?@@HTDiH39bJRT8opUISEloEAVT7SGt3FrFmLpcXwLLyV+/Fuk8DG8Yd/kPFi6HmIpUiH6q?##
+?@@jvxQIduNi/GJhLfLzaBssuM62GxUXwnA4HPWIkrmsBgAgXy+gq2+OKTtanAY1yPKIEY6?##
+?@@t1xeSIQ7wOHww1BXO+e/zllP0eJFeXwwkVaKiQ2wkxe6daWG4YYiVwGuxQ5pnLmowGF0?##
+?@@/K2EGutxJBHNsYWjxlsIANPbdZIQ70/04SPL+oBjbriXoEqieuKpT2LTScyFp85hbUt2?##
+?@@sSnsNsvyZY4Ss6MPVzzO09ug97uOLXb7kf1d/TCH/mKeZMgPc9ywJoMsnitTvtjwatXq?##
+?@@sjH/jrKy0oR4U2PKD52l4zAHS6gSNrcdL9ScfPE9NMqVgdCgtZXRfEEG9JvWSQWuK3eG?##
+?@@+6VxwSVArLDwbu458C2a9aR9obHK88n2ucxfenLRAyRlR7ulPVm7fYAAQAYsuEuCWrwk?##
+?@@FOM3BNtj21f/jOBA1ZvYDorSUL8I+qAhUiyzVh8RVEFBBqpSRxeD+kvlqFluidJqAzmM?##
+?@@1V6bo4iamiN9JLn0mC9ytlhW2nI7BpHCot8F4q6lBNQfIyU8p6WXmC3gwuM9f+Hic6lG?##
+?@@psoaatcPk7eepNIK8KClijM0BRgH9kTTTX5cp5xVtXvvvcYScoFHqD9GgwRuNWbmC+Po?##
+?@@p9MtwnHEtfSiKukDp5F9yN19fFzObeSgidknbo9H3a2qNT+aA92snzWTBxT7VBsmDnct?##
+?@@5N+60St/Rp1yi2gTklIpsJ++YyvPtGeST3ox+ysWoPcm2OhXP7nq80pWCTWAEwY4tPHC?##
+?@@XVaoN2DBHW6uDlV8g6lj4h9vaSEB0r+j9LC/U0XraWmhw1lR3KlxOTZpNxYTkUXT3jWg?##
+?@@ygDJ1/IPqJri/Z6AsUHjndMxng5XR0ClDP5kD/+NWK5bfxepqUNhpKBtY0PY8ky0Dv6u?##
+?@@B3M+hz05kHntXavXZfLWgvf3FkWJ8HwNo7qfcVMDXM4na+0Uzi8BOSww1DATxv2k6Hsz?##
+?@@EMDqonhGe6qXrB/tMirjrUweEqzV3K+1CBV3GMK5pV2L111w0W/vEgChipBmKX8Mqe4H?##
+?@@CYRlOCgt8/H5ZTw2+oFRo9RJwitZcK+DptANwGVdSYHJngWETaKPTSNuGd9F5FOhsRHJ?##
+?@@ZqRUUvIfEwcQIJAQVE85JpjQROOVQh3TxpR2siKiXkjXAP8FbKhqQHiB8E1UtikW0d6V?##
+?@@u3+rqqGWNZiDZhAQ/+Ypgcm8kM1Ocg48YRhsRqU2SgPiaMARGx8A1AB3HhD7Fcz8QXHW?##
+?@@xMxXxW+nViSdBwEY7Zof7R4H+OteOrj9fnaU8VH+zLv6x908qRZBM63szXvOfH1gcKUV?##
+?@@KZfHRAv+3rMwIx9KeLaPp/N6fj3tk1FxsRaz/mf5PWLvhX9i35Ijax7aD9gHBv9Dk08x?##
+?@@TtWKCX5L9Wue68xJbqDlMA2PS40OUcShT7LQ2wZcSXpu1xzxJ1HoZ3yF5eWorKPFIqne?##
+?@@h7/KtvlPOUS++2JqVFvcdJToIJ1iJI+OsIZ3Us5B0csU/sI4+6yJCrZrvIjXN0qzPAIx?##
+?@@sCDZ3rnBCbUo1HE8+5HJpX9EK0jEfU65HgMnE5BnHuEU9EqvM5lshM1ypvFj4MfzR8dZ?##
+?@@xdVqHSQ9iop3IgPIJ0s4CTkJXpyRTB4RblwZ3L9mJb2rBQ4j4tp1vDfc9L9C2qc5dJ/a?##
+?@@sjH/jsKkfGNPOTlsqYlkAQXkqan6ZErHx2Q3PEP7HdVa71wrFQAtMDUgEVVI7KmRYhcU?##
+?@@h7/Ktg7nRqOMw/C+3kkzZLeialrnSRaOg/jp8QVN3KuUHYjoyJUIVBxdUjQe9hb2jtQt?##
+?@@EMDqoqS0iGA7dsQeyatNC3TGupsk5U6PnpomN+utffHoQygQPxGu5aFlXrwpWMYY5D7b?##
+?@@0TxPQp1fC3m4BaPAyTr4gEOV63eC+eFRQexZbT1kHY960NcLvLPg/w973/dW/ArFMnMm?##
+?@@cgs5d8L4Jb5hPpL5X6Kg+/AWmvSF1m2/SJbk570Eebfy7Q1hG8Lmft12syQpY5E4VOGU?##
+?@@jwRjedZ+mMXfsbSCLczyof83x3zEBr/nvfLCFs/5uz4Kb9f093+T22HUpbFXXyUpuyRC?##
+?@@qNtAGz7cTt18M9wDNVh9YY/xCB6s9xIp/pWzrtClRvsxXJnkCxB6L6cjhqqxJYFCRNy+?##
+?@@Nf6taEqc4hVICgEkapNBnovoti26xKeJOwBK2IJ3VckaoURrlAdt4UTme7774BkZpTTW?##
+?@@ziIWOWhBBaljWPK9lWnyU64GLkuO/H1WmzEcW7ngdCq8sbauA1COQmu4kqrNC+D0iK9z?##
+?@@X2fO6Jwpz98L+I1Rxe0c+0ssuNVA7Bv7b2E9q/Qf8tM8qme3G1uSfm6Sf1QeCBjHvtp0?##
+?@@XE5/39yRxqI39gKX8qBcLiM72RxOXePqHbpWL8HXlWMXo22gg9ELzinyHQ3vChmbMOSQ?##
+?@@--END ENCRYPTION: "Complemetary_PWM", 101 lines
+?@@--START ENCRYPTION: "Complemetary_PWM"
+?@@kRVwJ7JXJ1k+ZeI64QsZ9WvBt0izeq19hO6ymVXYiI82NxJmQHgAPVqfxlHcd/dR5+eX?##
+?@@HjncdK+Q5yo73y4l1bMs1EebLeIUj6QfyqZUVDQBkdg74xub5ZW8L+E3XJilBVOhw63D?##
+?@@q/VaIjlE0M5/2dmLzIenNwr+4LVfzyMVJvOLxZRbR6AfRrFwWWDnHEYfKP6xFiE2gEhI?##
+?@@OBjmcW3TF4SJoGi1diHVmRabNm5NmOcQzzMX11OL3y3QQYE6gVBB4EiwUJVOppuHd//1?##
+?@@RYje7i23MylsR5CIBwlvUyObkUUVfcN7np1FJUltqoaUtAVD4jaS5h6KiCWxIf0Wor7K?##
+?@@5vDggqnvDYlFNtXlrBsZkGo0rybQKPDs0hoaSz8P2D4tImU/ud0aIL14CWIg5eHOd+YG?##
+?@@szoS59RKY6HPm5sMZIXN+nzsSKoB4pFYXNjQLfSnH4Gv3nldqro14qNXmJZJ9C+oq9Si?##
+?@@YHDiQPNkBvgqI5MknyXuLDXcOUdd4MkafHNDS7tv5yOh2Nr1m2G6RS5nmmvw/tP++jYU?##
+?@@Nf6taOOw4lUA51d87xSN8VG6toktgC9CC4pY9+R0I1o00181dO/TtmEdQT2YGltne3i9?##
+?@@xt19dhpy06q1qAJLbyr7tEWmtq431/61EU4s4d9CZK2HKyf2iW2j+UvQYT7eoWHpTQE6?##
+?@@M+2Gt1A1oHJzRCaPU45iCJQZkAsoebmIX8s8IZRBkzqEhrzGUwqdllJ39JnlYKaqYpgu?##
+?@@wKoKZBARlq4Ws3MC6HUGWUkKBX/CuNmJLQnVXG4baEPppgtNYRQJJYJKQ4lZp5P0aHai?##
+?@@Nf6taP9VhrHQrkuJ+1W9K1LDszhqRSAgUsHfaHScBxrMNVowXW9if+bJ5CfRfN4L3ckd?##
+?@@gpRr/XzHiTLdy91gVt5BGa5Kjidrvf9S7RZcv7I5Iu/QFxAcgzXx33kppsS9Pa6tm85Z?##
+?@@S7tRAPigaTxDM7oUC6z4Bw08eQp8tyQhC6RCdcDonQKDMlzeOCpsN/a171SpXWTamHfM?##
+?@@xMxXxWsgAoIa3EADZ+TSd+MSFNdjxyhoz8V1vNwASfzW9dIrAyH4qscRhucjuusyQIDc?##
+?@@2YHoBT85MP5oktyd+numAShi9iB2n8B++CHCZrYUmTASnpbfcEGIsMVjD+UKoeZoDRQU?##
+?@@/r+qyj11FTGH8Hxgubi/snedXbxmTvMZhLaPBk25bdwElyGWrfOVPVP56MT3RNC02kwK?##
+?@@/8e9I754xCMNrdP2n73yuGshW8/EXxTRd7h7MoC7a1Ksm4Bf33C4QS41mH1oFkYnYO0W?##
+?@@/K2EGlCMHmcZ3QY+c0SPjrjDY9doDmzcPFXYOZap/BnNBrY1FlbMB1egwbi/CImxPcXQ?##
+?@@AT/MdadM1+33O53z5CbyLidz4foNV6QxSRBYj8pgVjnzld9Saot3AIXt3cFXJ6GpPQfp?##
+?@@quxmy7tJy8JS7oA0cDwd9ZYOi7yojRILrcQRxIkOHl/geu/02RwITEScH+Vn3uuR/Dvb?##
+?@@E9ojrODADwK63PILi+9TLy27+I6eW4ObH0LiUbWzwJecfNlSripBbwP87cTylfvKJBcu?##
+?@@tEIlP6R3+iFEt29oV02FoqCgdeg+koE5g6wbtPXe8b7UseyVhj5qYYLUsfjmZOec1sLA?##
+?@@7Sxl7OHpRXkpyvIqn9Eq057DRMolKhxMnhTlYFYiAulXNkYf+tBe+1K2cN+dCN8+gbt5?##
+?@@4s6TIKNVC9kQy3GY4UdhcVUZu09x68Ftwu/nhkeKgfv2QmJuashB7VBqjSSRLCfbPYdC?##
+?@@B3M+h6lzkptuM/VO+4bVixWDfsYXnK7aHM/Vp63Ah+kVE8VmI8n1vg3ZjivWCH8T31gF?##
+?@@KI+06wZ1WaKOTcShg2BqU+Sgb7ZK0w+EVZCue3385WRS1zaSQQI4XvqJ9q9ViiH4GM3r?##
+?@@LboUpX0joJUA+UWSt9IdWI3OgYo+8LwEh+OpA6W336TGdJ13ajLMqetOQ4KN6uiJ4+/I?##
+?@@9noRB9hATHaSatpHloJJAx/97Vl8gkkupXYqUctS/Uu8QzbByC8mg8LxT8XueGqMOEZw?##
+?@@S7tRAHgV34dwpSlvjlNvKstcrVvuARD0tEjkySpwTeecMeF0hZnzLP80MQWAT41jgsT2?##
+?@@gINETGdpYkWIYAlHwpjfkJEObg/4d84lm/Ti0mwTIbP7NbwurcTJ5J2NHaKNb2+RWgtS?##
+?@@cQImHiOJmwbDap3YJSWrSQRl+LMuylco1zEniEKxEITBS5gFbOyB2FCvcQjnqSnrqFLs?##
+?@@tlRL8HrAbku4Zg2vPNDy7ImnWi2DKyXC3riqyI1xGj+JVtgjLwn4ET0CKFiYehUTb+if?##
+?@@n46U/6V15oe97oT+wDWIX0kzO5pyh+ISIcKnB/Ounz2Zc469cmAIntRCwKEOhPEZIASA?##
+?@@2HjVrPuPaPTOIaKl4P5FhhIZ5tirhp0Qit/SPeTdVxPpqqy8ZX8JZO5dm+AZCP7c1v1I?##
+?@@kRWJKotsBNvCFEsE7Wv39hRjqZaI+dFxsnc3QcCGE772jdWi0powSBWfh2OnOSUPWtG5?##
+?@@TtWKCe23wPqJYP4rOnk346tzbWH9s06/aHNK2jxXWO8qrmWs27KOX6RhwOzmHkJvPkss?##
+?@@UwDpw2HmDKBK7gist4ei1JBnErhEWonahV8HXbnEUSw74aSjX92vnQaUyq7AGJGo3WK+?##
+?@@BFkFfr0ikq2MPlmw4hatVbBdF4NID+YjgD1VYszhP4dgczFg8vOJiMJSrHCiqCfhUE+2?##
+?@@tUs4l9uKS7Fvqj4poUQtW8/eOs9GlMl1OxuHXxEl/Mj/azDfxLmGGhcuTZ1e/TEfoq56?##
+?@@Co14kHrAWkhXarvwzugnFDE18ynJIw/Y1rP4jTZbhvq6dvTEZ+Nx43E70+ybEshpxggT?##
+?@@001184x5GBwGokA8BgrCEr+q2S+lQTUXTH1mMVyVWYajeDx+ILVNLfXVpZfbBnI7H7sH?##
+?@@YHDiQHBvo6N0tDRatYyMSPL4ItuJKhjmSE19YHWy7xuaUG2ICGPUCV6AZQ71AWSa7UHw?##
+?@@wbIdvCFyNeHzt2ivIn7/Mg3ivy9H4vbbi0KOLtUjPAdUN0CThnQj0sB3lOkmCk3Swz8g?##
+?@@wrswFNQERVDbiK55wNfVL07bumrPDMTkJEsq+D0FTaPKCZG91bQdE7cCoXfHTqknOC1Y?##
+?@@S7tRAH6XSgbO4xTFLNTPCJhby4e6rNFBtQ4dSN0xh9R0Bm6uKqU3uWNp3UaFt7hJAVO4?##
+?@@oJanWExvSV9eSA/W3ATR5FjbVXY4y09IWZzgEw16mJt75HDaV36lc8D98KUVGMMpmej8?##
+?@@wbIdvBb/z0NDOgdFkY+zaDVuDpLSzfEvDomn0NFt2yyDWlqPIeVn6OULeEQiU8HI96Cl?##
+?@@ZqRUUvfU9LlcMnVSrVbrnDzoisAbrpgiITZ6AJeQRv7CrHX+r1eO6xtgTl26pPFWPiTS?##
+?@@a8+0DLdbiF+3B0ROvxMEkfybFGkO8oWp+BQ5WxMDFK599WwwlwDlq38cp2yVzAbLrds1?##
+?@@zBHviP/wveRZ52oSoxnhtipDRNJysnEaRnEdIa1eqopE09Sy5BK0VAsxVAManTMGXnAP?##
+?@@Ecn9+z0Gz9HkUaxhsxHw7zYHw3PaM0xLKp5j1RpDt7Ub9aaHSbyYqW7PVqtZX4kQif3B?##
+?@@rg+zLaYRQRFIeLfGphiVr0wMpQh3pj8YxydTaFOib6u69ApzKVwNmDWGTIdbVZnb76NZ?##
+?@@b/EAbiQKlB4LUzeEvs+gsuAcuertKIrQE9wLu6pYJjnZtjQ8GJfv8F61di2gutVwc/ER?##
+?@@dBxfJ242CT1bQ1icf4xXYWOXGqewMNZshT4ZYDlNXMub/KjMEtONSYH54Vp09PUZnjID?##
+?@@yfe2f48T3ceOmVbZKOmO1BwOD1BN7BtRD+jnZGo65wMrXVSvj+F4HmN9pB//bJ5lE/yT?##
+?@@bujtFZCITNmPwQSJesf0EvJMmfLHFsaqdJBlDYoBRJdLPIEXyGx0logoTmuVjsXg4HM2?##
+?@@t1xeSHVyF06zccYbkZCx99lntyp5uFgr3shP4mkNskabIpEAXJLg36tQhh8UIEQ1BGAk?##
+?@@5N+60fc5PDBMB15iLCjxhPFFO06NwBsMhEZw4dnVQxvaIp77dmJnyro9h/Z1dLBKqWVg?##
+?@@jfM9yT7l5AGq7Uvv32V0y+ruZLkdtZgevzis2i02K4L/t7XN9FSJSHAUzHgTwDpLJz5Z?##
+?@@noWBp+sGSOFs5JplJqh6Rd1h8aeyYU2HSHonmF83P7KCPmtbkbqkaV452Zu63i6vYs73?##
+?@@i+IWGBLESETXYTMwM4SrmTRfk6UaNZbN1tZQ9mBfH/5X3yd3eOB6gACs+xlgsE0mRijP?##
+?@@vIe+AixVGQsuEMMqbILHUny8OD6Jl2q53G/1t4C9ekNSg2+w4Aa/XrB4u566Y1YPKduh?##
+?@@tUs4lwBSXuztoeBvniTvR4E64hMb7XLIM1D4++tPBcwnsEl76BON+m97M0rP5qXdiiPG?##
+?@@unaYUfDmxzVlkV2JnboxYVG29g7JSNtW6ik0QeygAfO2zYVWeV1zqfNevdhwUK8qhlKz?##
+?@@94IkYL7niWOYTGt989vB0Po1ctK3/zswLZJ/nz3SQpc6k4n7I+2D0TDu2YzHScpXw01c?##
+?@@+Is3uIc53NaTngpiCGxxi7eSpmTMp2oTL/O+0hKJMRIWrGkDYEIVsCRitnw5oa+F1VUl?##
+?@@YXn1mIV0UOWHgALAjcsdjaCXfYJzEStRDkB+LcUf60r/LptYo/TC0/x4abjfwWbcWd7H?##
+?@@ygDJ16q9HBzCT8FlNHYUTyzdZ979MjAA+nkweX+hhz4ti1DRrKfwi72yfJ/8RWWrZazR?##
+?@@VyM2JXqPU9yJBlS4huPa0dTy+75eGXIfGczqQPU3TRay5LeyKsxXkiH0fiNuGShujyet?##
+?@@RH/Llgpx+azMu4ijdDzYGjnYMBTcKjiQqU9qrv+VrBS+hZApvJwfBsIk52AOXPRI/E1P?##
+?@@+ZRLEerMoiexbCBs3/uchVNA2bD+8RLamM5chpIzQzGpV45+1SBsA5fo4q4y5zb/EwPw?##
+?@@lkDo5Hyyg/IREdMazL0t6r86GPL8+MEoCPdfXAYbfjcAm+9G/RNBNNZABsMAXP/kibtg?##
+?@@J4ahk/fQL6uzExKhqtspMRBsKT2PGRYVgtOfZ6djTSOYb1TYIbVTPUrA2g+FW01+MoMl?##
+?@@rP6MfD7+X5XGLke3fUYCjb2zJDTLXq8g9iK9wD/q20fZlWKILUd25RvGELq0RvFz0bZO?##
+?@@eUe/4eP25BCkml8KJSUMxzS/uadK5ojsAzCMOsS88lpCKPzXBJLTh53LXZ7snk7dD6qZ?##
+?@@MuVzX9DknZ6dKxfRdYtluPFSZNSG+5Xj8zXpXxs4Cat217PUTimYlu1VotYYJOytX+hF?##
+?@@p9MtwmA67aWcUHjWQbKoj+l22fRJQUToyXL+tWsIjCyJ4SaizWt3Tv0OWyaN1kGaAv0m?##
+?@@KI+067+ds2ylTJHwlZdgTwAJOiu0gnyxjCEYQC3nawzfcDK+MgRAn/QDJb6MvJEBkzBZ?##
+?@@KZfHRDN+3fvWdE1uBmqcdp/dUaxTHiLZ/ukvvGPzPhSU/TWH7EImNJqdrWCBKIEw6wNA?##
+?@@EtEQU67TqQNkkem1V/adyBv3uXbbaf9mtxQMNRF3mdK/rIWr9e0F6DPEDax1at4xOcsN?##
+?@@ywjcMLoI1/oktQGMCtaPls0eRXc9nw+7nunRS+SfmJXAXOONFxvAC96CsDGqh7YkgZ00?##
+?@@NPaZEJLPfBGIOhQu+Nm0dEB2A1iCqO4sHWpXee02mJ7sRklWSpNBxVbmYYvBvARSgLfz?##
+?@@FetKXGc48SlGI1yrBEBVFX3m9bugt9pd0H38zi3ve2gtKxaAQfcMs8nvAjKAEyf9MXxZ?##
+?@@Jn2OOwDdfkTkTa02VN9oEe/9+LAzi02daqHqdk9Z1CkiAD29qV3ADYG8icPxfdGXTEQy?##
+?@@e1jlkszhdym7rC8JWivYHzPHFR4nSBqI98eTypmskWnx0eVGD49C3B+wUpXn22VTdrj0?##
+?@@dBxfJ55hEZKAVB4hPov4KZNKT+Lxri8aLqE8NPuCsCS1/h//3zdqUdzjsXv9SOLFwHac?##
+?@@/baXck56/8IADy3LHgdlyE4q5twEe5cLi9oZ3BWOj0Uf19PA9jeGG6A2W3PfBVzkIPCb?##
+?@@wrswFIF4H0lWLeJ1i/9Ol2/tHpAFGPP5pD7zhk8bJFZbBA5rNgo9E1ZMlYdwilq/tOJY?##
+?@@VyM2JeJ0s8+969PCA0BdEuyfa74LWil6gFccwi2XulA6e2zAlWtx5YS2ork2dZA6NXJd?##
+?@@3JohDvsez4A+nq3STVLBYMYeC/I2imXZqp1xkWOl/XoizZlgTXh1CZ7pluRWLBJ8gRTv?##
+?@@lTjVjIkTW2PNUByzgiA++c2j5PXcc9wt+yfu9jODWxL+c3/ZXdZq4/QzOqh8mw29tAft?##
+?@@5vDggm+XdL5W8XguluwbYNXj9ROnssa1CD2vpXCP55T7uyXWXigOsx2AF5ACkh+LjF6r?##
+?@@h7/KtmmB+K7U5hyFwZ15ewerIoOyplSZPu1L4SnVpCJLKy8dt6oVycmvl909CPbR9adZ?##
+?@@8Eaf9TAtkR++pIbFQPQS6z6o/sCXqTeWFmptd75vQ+MD3f+yYFQUbrVmGGHHC3ytIK5t?##
+?@@gYxYpNR+VoGHwCmoe1Z6ERHYpUzg7QIiEw6rJFmtugEFw7lw9gAqX4AeNRVWMdfqFDrx?##
+?@@wrswFENSY3OolObaE4BFt6C4Y3Pc4qrqfnwTEBjPyvkyZAzpo6kJGIRjsBrasf+DT9Ob?##
+?@@w8MwbQhbanklz4+N1TSi1yJnNzlOLez1PXuOVa8CD5xsZ34XXZiCnINGvdn/WjNEDSyw?##
+?@@--END ENCRYPTION: "Complemetary_PWM", 101 lines
+.subckt SIMPLIS_VC_SWITCH$9  1 2 3 4
+.NODE_MAP P 1
+.NODE_MAP N 2
+.NODE_MAP CP 3
+.NODE_MAP CN 4
+S1 1 2 3 4 SW IC=OPEN
+.MODEL SW VCSW ROFF=1000000 RON=0.016 TH=2 HYSTWD=0.1 LOGIC=POS
+.ends SIMPLIS_VC_SWITCH$9
+
+.subckt SIMPLIS_VC_SWITCH$8  1 2 3 4
+.NODE_MAP P 1
+.NODE_MAP N 2
+.NODE_MAP CP 3
+.NODE_MAP CN 4
+S1 1 2 3 4 SW IC=OPEN
+.MODEL SW VCSW ROFF=1000000 RON=0.016 TH=2 HYSTWD=0.1 LOGIC=POS
+.ends SIMPLIS_VC_SWITCH$8
+
+.subckt SIMPLIS_VC_SWITCH$7  1 2 3 4
+.NODE_MAP P 1
+.NODE_MAP N 2
+.NODE_MAP CP 3
+.NODE_MAP CN 4
+S1 1 2 3 4 SW IC=OPEN
+.MODEL SW VCSW ROFF=1000000 RON=0.016 TH=2 HYSTWD=0.1 LOGIC=POS
+.ends SIMPLIS_VC_SWITCH$7
+
+.subckt SIMPLIS_VC_SWITCH$6  1 2 3 4
+.NODE_MAP P 1
+.NODE_MAP N 2
+.NODE_MAP CP 3
+.NODE_MAP CN 4
+S1 1 2 3 4 SW IC=OPEN
+.MODEL SW VCSW ROFF=1000000 RON=0.016 TH=2 HYSTWD=0.1 LOGIC=POS
+.ends SIMPLIS_VC_SWITCH$6
+
+.subckt DIODE_SPICE_V3$5  1 2
+.NODE_MAP P 1
+.NODE_MAP N 2
+X_DEBUG 1 2 DIODE_SPICE_DEBUG_V3$31
+X_BASE 1 2 DIODE_SPICE_BASE_V3$32
+?@@--START ENCRYPTION: "DIODE_SPICE_BASE_V3"
+?@@tEIMPGZBpujLpKO/NFPss443NJwiDIlFgKUSVT4wWf/ccl6uO/VBTF0uQDAOsAh7NX4P?##
+?@@tUsfk5H+N+3lceMcuWuBHRNf6tNY0ssApBXL1/srzAkq6cZgxcxo/LXaJhlR3ZNmu72z?##
+?@@0kRDmN1fV2BlCW3WP8Hyh2RFpup0pVn2pbHRiHOg5zn8W55/fzvC66lfOoLwBV8N5dtR?##
+?@@p9MtwuVaSWP2iq7rF6EahKxrFLwPFpZEb9eFHke1OP30cHEsAfdK1uAHeRRyg8F8MDKo?##
+?@@7CRSlLqXtPIEc5YyV9/4EkRAj8lIaHOR62Jgg/v6mF7AQvh8g2mbBst2Kwz1zGgnUHAo?##
+?@@fWkLQwj5oL/u2zZYHU5LVn+fmjJnXKISEAUA5bSnU/GaLVLnfYWO9YPRCMyA8lGIxz2h?##
+?@@unaYUSh9OyOQOiTJpwqLMpHNCDYvwnesfOC/x32ADGe3vnhTTh21sIlTzM/V7NAzfR6N?##
+?@@Y4obSURS3WR35oFakrNXtLOcjhKNTqp9jRW6d5uSN6Y8StllkitgZ8OUdeWcmp5V8zlL?##
+?@@tEIlP8rWK5udtrMEUrh26yq0pFlNeJyyTs/9cz//WUuja8Msb8AzNzJMnooY2V7746P9?##
+?@@FetKXJ6HWda01V9OMMm1uskZi4u/pjnl46pIBXJbsm4n74AeB+O509eZ1OxYmpSBy+Gq?##
+?@@Co12kIozE+Nlc8WicsiDpJKXONCPArI9+yO0mZm1QLEf0L7FoNYzqDScs4AjeKulaMTs?##
+?@@--END ENCRYPTION: "DIODE_SPICE_BASE_V3", 13 lines
+.subckt DIODE_SPICE_DEBUG_V3$31  1 2
+.ends DIODE_SPICE_DEBUG_V3$31
+
+.ends DIODE_SPICE_V3$5
+
+.subckt DIODE_SPICE_V2$4  1 2
+.NODE_MAP P 1
+.NODE_MAP N 2
+!R_DBODY 1 2 MRDM IC=1
+.MODEL MRDM VPWLR  NSEG=3  X0=-45 Y0=-7.14712e-11  X1=0.36138314285715  Y1=5.73966375106043e-13
+*+ X2=0.480309 Y2=10
++ X2=0.470450643386814  Y2=9.2988466299778
++ X3=0.480309 Y3=10
+.ends DIODE_SPICE_V2$4
+
+.subckt DIODE_SPICE_V2$3  1 2
+.NODE_MAP P 1
+.NODE_MAP N 2
+!R_DBODY 1 2 MRDM IC=1
+.MODEL MRDM VPWLR  NSEG=3  X0=-45 Y0=-7.14712e-11  X1=0.36138314285715  Y1=5.73966375106043e-13
+*+ X2=0.480309 Y2=10
++ X2=0.470450643386814  Y2=9.2988466299778
++ X3=0.480309 Y3=10
+.ends DIODE_SPICE_V2$3
+
+.subckt DIODE_SPICE_V2$2  1 2
+.NODE_MAP P 1
+.NODE_MAP N 2
+!R_DBODY 1 2 MRDM IC=1
+.MODEL MRDM VPWLR  NSEG=3  X0=-45 Y0=-7.14712e-11  X1=0.36138314285715  Y1=5.73966375106043e-13
+*+ X2=0.480309 Y2=10
++ X2=0.470450643386814  Y2=9.2988466299778
++ X3=0.480309 Y3=10
+.ends DIODE_SPICE_V2$2
+
+.subckt DIODE_SPICE_V2$1  1 2
+.NODE_MAP P 1
+.NODE_MAP N 2
+!R_DBODY 1 2 MRDM IC=1
+.MODEL MRDM VPWLR  NSEG=3  X0=-45 Y0=-7.14712e-11  X1=0.36138314285715  Y1=5.73966375106043e-13
+*+ X2=0.480309 Y2=10
++ X2=0.470450643386814  Y2=9.2988466299778
++ X3=0.480309 Y3=10
+.ends DIODE_SPICE_V2$1
+
+.end
+
